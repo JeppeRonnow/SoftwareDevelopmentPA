@@ -28,6 +28,15 @@ class TodoList {
 		// TEST PRINT
 		cout << todolist.size() << endl;
 	}
+
+	void delete_task(int index) {
+
+		if (index >= 0 && index < todolist.size()) {
+			todolist.erase(todolist.begin() + index);
+		}
+		std::cout << "Task ikke fundet: " << index << std::endl;
+	}
+
 };
 
 int main() {
