@@ -36,7 +36,8 @@ class TodoList {
 		for (int i = 0; i < todolist.size(); i++){
 			string status = todolist[i]._status;
 			string description = todolist[i]._description;
-			cout << format("[{}] {}. {}\n", status, i, description);
+			int j = i + 1;
+			cout << format("[{}] {}. {}\n", status, j, description);
 		}
 		
 		// Make new line and flush buffer
@@ -45,6 +46,7 @@ class TodoList {
 
 	// Delete task
 	void delete_task(int index) {
+		index--;
 		if (index >= 0 && index < todolist.size()) {
 			todolist.erase(todolist.begin() + index);
 		} 
@@ -54,6 +56,7 @@ class TodoList {
 	}
 
 	void update_task(int index, string status) {
+		index--;
 		if (index >= 0 && index < todolist.size()) {
 			todolist[index]._status = status;
 		} 
@@ -73,14 +76,12 @@ int main() {
     	todo.create_task("TEST2", "DONE");
 		todo.create_task("TEST3", "OnGoing");
 
-	// TEST PRINT
+		// TEST PRINT
     	cout << todo.todolist.size() << endl;
 
 		// Delete task at index 0
-		todo.delete_task(0);
+		//todo.delete_task(0);
 
-    	// TEST PRINT
-    	cout << todo.todolist.size() << endl;
 
     	//Show tasks
     	todo.show_tasks();
