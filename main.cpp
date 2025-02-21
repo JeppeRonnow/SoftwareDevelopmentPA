@@ -42,21 +42,38 @@ class TodoList {
 		// Make new line and flush buffer
 		cout << endl;
 	}
+
+	// Delete task
+	void delete_task(int index) {
+		if (index >= 0 && index < todolist.size()) {
+			todolist.erase(todolist.begin() + index);
+		} 
+		else {
+			std::cout << "Task ikke fundet: " << index << std::endl;
+		}
+	}
+
 };
 
 int main() {
+	// Create todo list
+    	TodoList todo = TodoList();
 
-    TodoList todo = TodoList();
+    	// Create new task
+    	todo.create_task("TEST", "OnGoing");
+    	todo.create_task("TEST2", "DONE");
 
-    // Create new task
-    todo.create_task("TEST", "OnGoing");
-    todo.create_task("TEST2", "DONE");
+	// TEST PRINT
+    	cout << todo.todolist.size() << endl;
 
-    // TEST PRINT
-    cout << todo.todolist.size() << endl;
+	// Delete task at index 0
+	todo.delete_task(0);
 
-    //Show tasks
-    todo.show_tasks();
+    	// TEST PRINT
+    	cout << todo.todolist.size() << endl;
 
-    return 0;
+    	//Show tasks
+    	todo.show_tasks();
+
+    	return 0;
 }
