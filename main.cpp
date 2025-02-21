@@ -36,7 +36,8 @@ class TodoList {
 		for (int i = 0; i < todolist.size(); i++){
 			string status = todolist[i]._status;
 			string description = todolist[i]._description;
-			cout << format("[{}] {}. {}\n", status, i, description);
+			int j = i + 1;
+			cout << format("[{}] {}. {}\n", status, j, description);
 		}
 		
 		// Make new line and flush buffer
@@ -67,7 +68,7 @@ int main() {
     	cout << todo.todolist.size() << endl;
 
 	// Delete task at index 0
-	todo.delete_task(0);
+	//todo.delete_task(0);
 
     	// TEST PRINT
     	cout << todo.todolist.size() << endl;
