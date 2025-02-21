@@ -53,6 +53,15 @@ class TodoList {
 		}
 	}
 
+	void update_task(int index, string status) {
+		if (index >= 0 && index < todolist.size()) {
+			todolist[index]._status = status;
+		} 
+		else {
+			std::cout << "Task ikke fundet: " << index << std::endl;
+		}
+	}
+
 };
 
 int main() {
@@ -62,18 +71,24 @@ int main() {
     	// Create new task
     	todo.create_task("TEST", "OnGoing");
     	todo.create_task("TEST2", "DONE");
+		todo.create_task("TEST3", "OnGoing");
 
 	// TEST PRINT
     	cout << todo.todolist.size() << endl;
 
-	// Delete task at index 0
-	todo.delete_task(0);
+		// Delete task at index 0
+		todo.delete_task(0);
 
     	// TEST PRINT
     	cout << todo.todolist.size() << endl;
 
     	//Show tasks
     	todo.show_tasks();
+
+		// Update task at index 1
+		todo.update_task(1, "updated");
+
+		todo.show_tasks();
 
     	return 0;
 }
