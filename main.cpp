@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <format>
 
 using namespace std;
 
@@ -28,6 +29,19 @@ class TodoList {
 		// TEST PRINT
 		cout << todolist.size() << endl;
 	}
+
+	// Show tasks
+	void show_tasks(){
+		// Print new line with each task
+		for (int i = 0; i < todolist.size(); i++){
+			string status = todolist[i]._status;
+			string description = todolist[i]._description;
+			cout << format("[{}] {}. {}\n", status, i, description);
+		}
+		
+		// Make new line and flush buffer
+		cout << endl;
+	}
 };
 
 int main() {
@@ -36,9 +50,13 @@ int main() {
 
     // Create new task
     todo.create_task("TEST", "OnGoing");
+    todo.create_task("TEST2", "DONE");
 
     // TEST PRINT
     cout << todo.todolist.size() << endl;
+
+    //Show tasks
+    todo.show_tasks();
 
     return 0;
 }
