@@ -3,6 +3,8 @@
 #include <string>
 #include <vector>
 #include <format>
+#include <unordered_map>
+#include <functional>
 
 using namespace std;
 
@@ -70,26 +72,30 @@ class TodoList {
 int main() {
 	// Create todo list
     	TodoList todo = TodoList();
+	
+	// Unordered map with all user functions fucntions	
+	unordered_map<string, function<void()>> commands = {
+		{"Create", [&todo]() {todo.create_task(); }},
+		{"Delete", [&todo]() {todo.delete_task(); }},
+		{"Update", [&todo]() {todo.update_task(); }},
+		{"Show",   [&todo]() {todo.show_tasks();  }}
+	};
 
-    	// Create new task
-    	todo.create_task("TEST", "OnGoing");
-    	todo.create_task("TEST2", "DONE");
-		todo.create_task("TEST3", "OnGoing");
+	// Main loop
+	while (true) {
+		// Take input
+		cout << "ToDo List: ";
+		string call;
+		cin >> call;
+		
+		// Check input and call function
+		if (commands.find(call) != commands.end()) {
+			commands[call]();
+		} else {
+			cout << "Invalid command (use \"Help\" to se list of commands)" << endl;
+		}
 
-		// TEST PRINT
-    	cout << todo.todolist.size() << endl;
-
-		// Delete task at index 0
-		//todo.delete_task(0);
-
-
-    	//Show tasks
-    	todo.show_tasks();
-
-		// Update task at index 1
-		todo.update_task(1, "updated");
-
-		todo.show_tasks();
+	}
 
     	return 0;
 }
