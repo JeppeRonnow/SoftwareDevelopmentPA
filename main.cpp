@@ -68,6 +68,7 @@ class TodoList {
 		int index;
 
 		// Get index
+		cout << "Enter task number to delete: ";
 		cin >> index;
 		index--;
 
@@ -106,6 +107,15 @@ class TodoList {
 
 };
 
+// Print all commands
+void help(const unordered_map<string, function<void()>>& commands) {
+	cout << "Available commands:\n";
+	for (const auto& pair : commands) {
+		cout << pair.first << "\n";
+	}
+	cout << endl;
+}
+
 int main() {
 	// Create todo list
     	TodoList todo = TodoList();
@@ -127,7 +137,9 @@ int main() {
 		
 		// Check input and call function
 		if (commands.find(call) != commands.end()) {
-			commands[call]();
+			commands[call](); // Call function from map
+		} else if (call == "Help") {
+			help(commands); // Pass the map with cunctions
 		} else {
 			cout << "Invalid command (use \"Help\" to se list of commands)" << endl;
 		}
