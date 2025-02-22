@@ -25,9 +25,25 @@ class TodoList {
 	TodoList(){}
 	
 	// Create new task
-	void create_task(string des, string stat){
-		Task new_task = Task(des, stat);
+	void create_task(){
+		// Function variables
+		string description;
+		string status;
+
+		// Get description
+		cout << "Enter new task description: ";
+		cin >> description;
+
+		// Get status
+		cout << "Enter status of task: ";
+		cin >> status;
+
+		// Create new task
+		Task new_task = Task(description, status);
+
+		// Add task to todolist
 		todolist.push_back(new_task);
+
 		// TEST PRINT
 		cout << todolist.size() << endl;
 	}
@@ -47,20 +63,41 @@ class TodoList {
 	}
 
 	// Delete task
-	void delete_task(int index) {
+	void delete_task() {
+		// Function variables
+		int index;
+
+		// Get index
+		cin >> index;
 		index--;
+
+		// Check for task and delete
 		if (index >= 0 && index < todolist.size()) {
 			todolist.erase(todolist.begin() + index);
 		} 
 		else {
-			std::cout << "Task ikke fundet: " << index << std::endl;
+			std::cout << "Task not found: " << index << std::endl;
 		}
 	}
 
-	void update_task(int index, string status) {
+	void update_task() {
+		// Function variables
+		int index;
+		string status;
+
+		// Get index
+		cout << "Enter task number to update: ";
+		cin >> index;
 		index--;
+
+		// Get new status
+		cout << "Enter new status: ";
+		cin >> status;
+		
+		// Check for task and update
 		if (index >= 0 && index < todolist.size()) {
 			todolist[index]._status = status;
+			cout << "Task updated!" << endl;
 		} 
 		else {
 			std::cout << "Task ikke fundet: " << index << std::endl;
