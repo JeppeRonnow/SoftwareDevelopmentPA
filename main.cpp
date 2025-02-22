@@ -44,8 +44,7 @@ class TodoList {
 		// Add task to todolist
 		todolist.push_back(new_task);
 
-		// TEST PRINT
-		cout << todolist.size() << endl;
+		cout << endl;
 	}
 
 	// Show tasks
@@ -75,9 +74,10 @@ class TodoList {
 		// Check for task and delete
 		if (index >= 0 && index < todolist.size()) {
 			todolist.erase(todolist.begin() + index);
+			cout << "Task deleted!\n" << endl;
 		} 
 		else {
-			std::cout << "Task not found: " << index << std::endl;
+			cout << "Task not found: " << index + 1 << "\n" << endl;
 		}
 	}
 
@@ -98,10 +98,10 @@ class TodoList {
 		// Check for task and update
 		if (index >= 0 && index < todolist.size()) {
 			todolist[index]._status = status;
-			cout << "Task updated!" << endl;
+			cout << "Task updated!\n" << endl;
 		} 
 		else {
-			std::cout << "Task ikke fundet: " << index << std::endl;
+			cout << "Task not found: " << index + 1 << "\n" << endl;
 		}
 	}
 
@@ -116,6 +116,7 @@ void help(const unordered_map<string, function<void()>>& commands) {
 	cout << endl;
 }
 
+// Main function
 int main() {
 	// Create todo list
     	TodoList todo = TodoList();
@@ -141,7 +142,7 @@ int main() {
 		} else if (call == "Help") {
 			help(commands); // Pass the map with cunctions
 		} else {
-			cout << "Invalid command (use \"Help\" to se list of commands)" << endl;
+			cout << "Invalid command (use \"Help\" to se list of commands)\n" << endl;
 		}
 
 	}
