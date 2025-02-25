@@ -45,6 +45,8 @@ class TodoList {
 		todolist.push_back(new_task);
 
 		cout << endl;
+
+		save_tasks_to_txt();
 	}
 
 	// Show tasks
@@ -79,6 +81,8 @@ class TodoList {
 		else {
 			cout << "Task not found: " << index + 1 << "\n" << endl;
 		}
+
+		save_tasks_to_txt();
 	}
 
 	void update_task() {
@@ -103,8 +107,45 @@ class TodoList {
 		else {
 			cout << "Task not found: " << index + 1 << "\n" << endl;
 		}
+
+		save_tasks_to_txt();
 	}
 
+	void save_tasks_to_txt() {
+		// Function variables
+		string filename = "todo.txt";
+
+		// Open file
+		ofstream file(filename);
+		if (file.is_open()) {
+			// Write tasks to file
+			for (int i = 0; i < todolist.size(); i++) {
+				string status = todolist[i]._status;
+				string description = todolist[i]._description;
+				file << format("{} {}\n", status, description);
+			}
+			file.close();
+		}
+	}
+
+	void load_tasks_from_txt() {
+		// Function variables
+		string filename = "todo.txt";
+
+		// Open file
+		ifstream file(filename);
+		if (file.is_open()) {
+			// Read tasks from file
+			string line;
+			while (getline(file, line)) {
+				string status = line.substr(0, line.find(" "));
+				string description = line.substr(line.find(" ") + 1);
+				Task new_task = Task(description, status);
+				todolist.push_back(new_task);
+			}
+			file.close();
+		}
+	}
 };
 
 // Print all commands
@@ -123,12 +164,13 @@ int main() {
 	
 	// Unordered map with all user functions fucntions	
 	unordered_map<string, function<void()>> commands = {
-		{"Create", [&todo]() {todo.create_task(); }},
-		{"Delete", [&todo]() {todo.delete_task(); }},
-		{"Update", [&todo]() {todo.update_task(); }},
-		{"Show",   [&todo]() {todo.show_tasks();  }}
+		{"create", [&todo]() {todo.create_task(); }},
+		{"delete", [&todo]() {todo.delete_task(); }},
+		{"update", [&todo]() {todo.update_task(); }},
+		{"show",   [&todo]() {todo.show_tasks();  }}
 	};
 
+	todo.load_tasks_from_txt();
 	// Main loop
 	while (true) {
 		// Take input
@@ -139,10 +181,10 @@ int main() {
 		// Check input and call function
 		if (commands.find(call) != commands.end()) {
 			commands[call](); // Call function from map
-		} else if (call == "Help") {
+		} else if (call == "help") {
 			help(commands); // Pass the map with cunctions
 		} else {
-			cout << "Invalid command (use \"Help\" to se list of commands)\n" << endl;
+			cout << "Invalid command (use \"help\" to se list of commands)\n" << endl;
 		}
 
 	}
