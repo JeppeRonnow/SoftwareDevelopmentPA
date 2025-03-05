@@ -2,7 +2,6 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include <format>
 #include <unordered_map>
 #include <functional>
 
@@ -119,10 +118,10 @@ class TodoList {
 		ofstream file(filename);
 		if (file.is_open()) {
 			// Write tasks to file
-			for (int i = 0; i < todolist.size(); i++) {
-				string status = todolist[i]._status;
-				string description = todolist[i]._description;
-				file << format("{} {}\n", status, description);
+      for (int i = 0; i < todolist.size(); i++) {
+			    string status = todolist[i]._status;
+			    string description = todolist[i]._description;
+			    file << status << " " << description << "\n";
 			}
 			file.close();
 		}
