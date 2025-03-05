@@ -56,7 +56,7 @@ class TodoList {
 			string status = todolist[i]._status;
 			string description = todolist[i]._description;
 			int j = i + 1;
-			cout << format("[{}] {}. {}\n", status, j, description);
+			cout << "[" << status << "] " << j << ". " << description << "\n";
 		}
 		
 		// Make new line and flush buffer
